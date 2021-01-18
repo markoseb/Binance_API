@@ -61,6 +61,11 @@ def drop_table(table_name):
 # if __name__ == "__main__":
 #     metadata = MetaData(engine, reflect=True)
 #     drop_table("LINK")
+#     drop_table("DOT")
+#     drop_table("BAT")
+#     drop_table("ATOM")
+#     drop_table("CHZ")
+#     drop_table("VITE")
 
 
 

@@ -28,7 +28,9 @@ def create_plot_img(table_name = ""):
     for y_var in y_vars:
         img_file=table_name+y_var
         get_profit(df, y_var)
-        fig = px.line(df, x='data', y=y_var,title=f"{img_file}  {profit['profit']}   {profit['pr_profit']}%")
+        fig = px.line(df, x='data', y=y_var,
+                      title=f"{img_file} {profit['profit']} {profit['pr_profit']}% Current Val:{profit['last_val']}",
+                      width=2000, height= 800)
         filepath=os.path.join(DataFolder,f'img/{img_file}.png')
         pio.write_image(fig,filepath,format="png",engine="kaleido")
 
@@ -40,3 +42,4 @@ def get_profit(df, val):
     last_val = df.tail(1)[val].values
     profit['profit'] = last_val - first_val
     profit['pr_profit'] = profit['profit'] / first_val * 100
+    profit['last_val'] = last_val
