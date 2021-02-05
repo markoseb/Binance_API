@@ -1,13 +1,12 @@
 from binance.client import Client
-from graphs import create_plot_img
+from myproject.graphs import create_plot_img
 from filePath import API_KEY, API_SECRET,DataFolder
-from sql_data import csv_to_sql
+from myproject.sql_data import csv_to_sql
 import datetime
-import csv_data 
-import scrape 
+from myproject import csv_data, scrape
 import os
 import pandas as pd
-
+from myproject.charts.views import coin_list
 client = Client(API_KEY, API_SECRET)
 
 
@@ -33,7 +32,7 @@ def Create_db_graphs_account_balance():
     account_balance = account_inf["balances"]
 
     if len(account_balance)>0:#nie potrzebne
-        scrape.parse_and_extract(url="https://kursy-walut.mybank.pl/",name="Exchange_rates")
+        scrape.parse_and_extract(url="https://kursy-walut.mybank.pl/", name="Exchange_rates")
 
         for coin in account_balance:
 
@@ -44,6 +43,7 @@ def Create_db_graphs_account_balance():
                 Get_headers_names(coin=coin)
 
                 if float(coin["USDT"])>1:
+                    coin_list.append(coin["asset"])
                     data = {"data":data_time}
                     
                     Get_total_coins_balance(coin=coin,data=data)
@@ -87,7 +87,7 @@ def Expand_coin_dictionary(coin={}):
     Add_item_coin_value(price_units="USDT",coin=coin)
     Add_item_coin_value(price_units="BTC",coin=coin)
 
-    coin["PLN"]=Get_coin_value(coin["USDT"],csv_data.Read_course_from_csv())
+    coin["PLN"]=Get_coin_value(coin["USDT"], csv_data.Read_course_from_csv())
     # coin["USDT-BTC"]=Get_coin_value(coin["BTC"],BTCUSDT["price"])
     # coin["BTC(<-USDT)"]= float(coin["USDT"])/ float(BTCUSDT["price"])
 
@@ -138,7 +138,7 @@ def Get_coin_value(number = "", price=""):
 
 
 
-
-if __name__ == "__main__":
-    Create_db_graphs_account_balance()
+#
+# if __name__ == "__main__":
+#     Create_db_graphs_account_balance()
 

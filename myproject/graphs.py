@@ -1,7 +1,7 @@
 
 import os
 import plotly.io._kaleido as pio
-from sql_data import get_table_sql
+from myproject.sql_data import get_table_sql
 import plotly.express as px
 from filePath import DataFolder
 #pip3 install termgraph

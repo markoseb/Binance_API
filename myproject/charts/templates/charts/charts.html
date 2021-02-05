@@ -1,0 +1,28 @@
+{%extends "base.html"%}
+{%import "bootstrap/wtf.html" as wtf%}
+
+
+
+
+{%block content%}
+
+<div class="jumbotron"  >
+    <form  method="POST"  >
+
+        {{wtf.form_field(form.token)}}
+        {{wtf.form_field(form.valuesType)}}
+
+        <div class="form-group">
+             {{wtf.form_field(form.submit, class="btn btn-primary", onclick="setData({{x_val}},{{y_val}})")}}
+        </div>
+
+
+
+    </form>
+
+</div>
+
+        <div style="width: 75%">
+        <canvas id="canvas" height="450" width="600"></canvas>
+    </div>
+{%endblock%}

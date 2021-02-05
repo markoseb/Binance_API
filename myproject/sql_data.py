@@ -1,15 +1,12 @@
 import pandas as pd
 import logging
-import sqlalchemy
-import sqlacodegen
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import Column, Integer, String, Float
-from csv_data import Read_csv
+from sqlalchemy import String, Float
+from myproject.csv_data import Read_csv
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import MetaData
 from filePath import DataFolder
-from sqlalchemy import func, select
 
 engine = create_engine(f"sqlite:///{DataFolder}/crypto_db.db")#mysql,postgres
 Base = declarative_base()
