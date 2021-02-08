@@ -15,22 +15,21 @@ def Read_course_from_csv(symbol="USD"):
         Returns: 
             current prise:  A current currency rate in PLN
     """
-    
+
     cvs_file = Read_csv()
-    currency_list=cvs_file["currency"]
+    currency_list = cvs_file["currency"]
     # print (currency_list)
-    course_list=cvs_file["course"]
-    n=0
+    course_list = cvs_file["course"]
+    n = 0
     for i in currency_list:
         if i == symbol:
             # print (currency_list)
-            return course_list[n].replace(",",".")
-        n=n+1
-        
-  
+            return course_list[n].replace(",", ".")
+        n = n + 1
+
+
 def Read_csv(file_name="Exchange_rates"):
-   
-    """ 
+    """
         The function to read CSV file and return DataFrame
   
         Parameters: 
@@ -40,15 +39,15 @@ def Read_csv(file_name="Exchange_rates"):
             file (DataFrame):  A DataFrame file
     """
 
-    filepath=os.path.join(DataFolder,f'{file_name}.csv')
+    filepath = os.path.join(DataFolder, f'{file_name}.csv')
     if os.path.isfile(filepath):
-        return pd.read_csv(filepath,encoding='utf-8', sep=';')
+        return pd.read_csv(filepath, encoding='utf-8', sep=';')
     else:
         return False
 
-def Write_csv_file(data_list=[] ,columns=[],filepath=""):
 
-    """ 
+def Write_csv_file(data_list=[], columns=[], filepath=""):
+    """
         The function to write/create CSV file
   
         Parameters: 
@@ -61,13 +60,10 @@ def Write_csv_file(data_list=[] ,columns=[],filepath=""):
     """
 
     mode = 'a'
-    header= False
+    header = False
     if not os.path.isfile(f"{DataFolder}/{filepath}"):
         mode = 'w'
-        header= True
-       
-    df = pd.DataFrame(data_list,columns=columns)
-    df.to_csv(path_or_buf=filepath,index = False, mode = mode,header= header,encoding='utf-8', sep=';')
+        header = True
 
-
-
+    df = pd.DataFrame(data_list, columns=columns)
+    df.to_csv(path_or_buf=filepath, index=False, mode=mode, header=header, encoding='utf-8', sep=';')

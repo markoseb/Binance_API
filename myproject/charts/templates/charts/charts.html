@@ -2,27 +2,84 @@
 {%import "bootstrap/wtf.html" as wtf%}
 
 
-
-
 {%block content%}
 
-<div class="jumbotron"  >
-    <form  method="POST"  >
 
-        {{wtf.form_field(form.token)}}
-        {{wtf.form_field(form.valuesType)}}
+<div class="d-flex" id="wrapper">
 
-        <div class="form-group">
-             {{wtf.form_field(form.submit, class="btn btn-primary", onclick="setData({{x_val}},{{y_val}})")}}
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading">CHARTS</div>
+        <div class="list-group list-group-flush">
+            <form method="POST" >
+                {{wtf.form_field(form.token)}}
+                {{wtf.form_field(form.valuesType)}}
+
+                <div class="form-group">
+                    {{wtf.form_field(form.submit, class="btn btn-primary", onclick="setData({{x_val}},{{y_val}})")}}
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom ">
+
+
+            <div class="row">
+
+                {% for key, value in profit.items() %}
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+
+                    <span>{{ key }}</span>
+                    <span>{{ value }}<small>%</small></span>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.col -->
+
+                {% endfor %}
+
+            </div>
+
+        </nav>
+
+
+
+        <div class="container-fluid">
+
+            <div style="width: 85%;">
+                <canvas id="canvas" height="450" width="600"></canvas>
+            </div>
         </div>
 
-
-
-    </form>
+    </div>
+    <!-- /#page-content-wrapper -->
 
 </div>
 
-        <div style="width: 75%">
-        <canvas id="canvas" height="450" width="600"></canvas>
-    </div>
+
 {%endblock%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

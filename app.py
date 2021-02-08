@@ -1,6 +1,8 @@
 from myproject import app
 from flask import render_template
 from myproject.connect import Create_db_graphs_account_balance
+
+
 # from myproject.sql_data import drop_table,engine
 # from sqlalchemy import MetaData
 
@@ -8,7 +10,6 @@ from myproject.connect import Create_db_graphs_account_balance
 def index():
     Create_db_graphs_account_balance()
     return render_template('home.html')
-
 
 
 if __name__ == '__main__':

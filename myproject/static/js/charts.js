@@ -74,7 +74,13 @@ function runChart(x,y)
 {
 
     setData(x,y,update=false)
-        var ctx = document.getElementById("canvas").getContext("2d");
+
+    var can = document.querySelector('canvas');
+    can.style.position = 'absolute';
+
+    can.style.left = "350px";
+
+        var ctx =can.getContext("2d");
         myBar = new Chart(ctx, {
             type: 'bar',
             data: barChartData,

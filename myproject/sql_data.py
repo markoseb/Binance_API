@@ -63,8 +63,3 @@ def drop_table(table_name):
 #     drop_table("ATOM")
 #     drop_table("CHZ")
 #     drop_table("VITE")
-
-
-
-
-
