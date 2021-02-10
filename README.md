@@ -1,10 +1,10 @@
 # [Binance API - CHARTS](https://startbootstrap.com/template/simple-sidebar/) -work in progress
 
-##Preview
+## Preview
  
 [![Binance API Preview](https://github.com/markoseb/Binance_API/blob/WebApi-Flask/BinanceApi.png)]
 
-##Download and Installation
+## Download and Installation
 
 To begin using this template:
 *	Download on GitHub
@@ -12,9 +12,9 @@ To begin using this template:
 *	Add DataFolder in the same directory where Binance_API is located.
 *	Enter your own API_KEY & API_SECRET in conf.txt
 
-##Usage
+## Usage
 
-###Basic Usage
+### Basic Usage
 
 After downloading run:
 *	set FLASK_APP=app.py
@@ -23,14 +23,14 @@ After downloading run:
 *	flask db upgrade
 *	python app.
 
-##About
+## About
 
 Get data from your Binance account. Check your wallet and make some data science. Using current api version you can:
 *	create charts using your binance account data.
 *	see your profit for every single coin, or total balance. Compare with previous values.
 *	change data type for your charts (USD, BTC,PLN)
 
-##How it works
+## How it works
 
 *	connect with your binance account
 *	get your account balance and create database
