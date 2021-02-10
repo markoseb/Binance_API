@@ -2,7 +2,7 @@
 
 ##Preview
  
-[![Binance API Preview]()]
+[![Binance API Preview](https://github.com/markoseb/Binance_API/blob/WebApi-Flask/BinanceApi.png)]
 
 ##Download and Installation
 
