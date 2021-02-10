@@ -7,10 +7,10 @@
 ## Download and Installation
 
 To begin using this template:
-*	Download on GitHub
-*	create virtual env with all Packages in requirements.txt
-*	Add DataFolder in the same directory where Binance_API is located.
-*	Enter your own API_KEY & API_SECRET in conf.txt
+*	Download on [GitHub](https://github.com/markoseb/Binance_API)
+*	create virtual env with all Packages in [requirements.txt](https://github.com/markoseb/Binance_API/blob/WebApi-Flask/requirements.txt)
+*	Add [DataFolder](https://github.com/markoseb/Binance_API/tree/WebApi-Flask/DataFolder) in the same directory where Binance_API is located.
+*	Enter your own API_KEY & API_SECRET in [conf.txt](https://github.com/markoseb/Binance_API/blob/WebApi-Flask/DataFolder/Binance%20API/conf.txt)
 
 ## Usage
 
