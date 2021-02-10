@@ -3,8 +3,8 @@ from flask import render_template
 from myproject.connect import Create_db_graphs_account_balance
 
 
-# from myproject.sql_data import drop_table,engine
-# from sqlalchemy import MetaData
+from myproject.sql_data import drop_table,engine,get_table_sql
+from sqlalchemy import MetaData
 
 @app.route('/')
 def index():
@@ -15,4 +15,5 @@ def index():
 if __name__ == '__main__':
     app.run(debug=True)
     # metadata = MetaData(engine, reflect=True)
-    # drop_table("REEF")
+    # drop_table("ETH")
+    # print (metadata.tables.keys())

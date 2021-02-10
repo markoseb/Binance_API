@@ -16,7 +16,7 @@ endpoint_path = "/sapi/v1/capital/config/getall"
 BTCUSDT = client.get_symbol_ticker(symbol="BTCUSDT")
 
 header_names = ["data"]
-total_coins_balance = {"USDT": 0.0, "BTC": 0.0, "PLN": 0.0}
+
 total_headers = ["data", "USDT", "BTC", "PLN"]
 data_time = datetime.datetime.now()
 
@@ -30,7 +30,7 @@ def Create_db_graphs_account_balance():
 
     account_inf = client.get_account()
     account_balance = account_inf["balances"]
-
+    total_coins_balance = {"USDT": 0.0, "BTC": 0.0, "PLN": 0.0}
     if len(account_balance) > 0:  # nie potrzebne
         scrape.parse_and_extract(url="https://kursy-walut.mybank.pl/", name="Exchange_rates")
 
@@ -43,16 +43,17 @@ def Create_db_graphs_account_balance():
                 Get_headers_names(coin=coin)
 
                 if float(coin["USDT"]) > 1:
-                    coin_list.append(coin["asset"])
+                    if not(any(elem in coin["asset"] for elem in coin_list)):
+                        coin_list.append(coin["asset"])
                     data = {"data": data_time}
 
-                    Get_total_coins_balance(coin=coin, data=data)
+                    Get_total_coins_balance(total_coins_balance,coin=coin, data=data)
 
                     Create_db_img(coin=coin, data=data)
 
         dataFramee = pd.DataFrame([total_coins_balance])
         csv_to_sql(dataFramee, "Total_balance")
-        create_plot_img("Total_balance")
+        # create_plot_img("Total_balance")
 
 
 def Add_item_coin_value(price_units="", coin={}):
@@ -97,7 +98,7 @@ def Get_headers_names(coin={}):
             header_names.append(key)
 
 
-def Get_total_coins_balance(coin={}, data={}):
+def Get_total_coins_balance(total_coins_balance,coin={}, data={}):
     for total_key in total_headers:
         if total_key == "data":
             total_coins_balance["data"] = data["data"]
@@ -113,7 +114,7 @@ def Create_db_img(coin={}, data={}):
     # csv_data.Write_csv_file(data_list= available_coin_list,columns=header_names,filepath=filepath)
     dataFramee = pd.DataFrame([data])
     csv_to_sql(dataFramee, coin['asset'])
-    create_plot_img(coin["asset"])
+    # create_plot_img(coin["asset"])
 
 
 def Get_coin_value(number="", price=""):

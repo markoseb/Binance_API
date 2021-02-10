@@ -14,7 +14,7 @@ var randomScalingFactor = function() {
         datasets: [ {
             type: 'line',
             label: 'Dataset 3',
-            backgroundColor: "rgba(43, 111, 106, 1)",
+            backgroundColor: "rgba(73, 193, 51, 1)",
             data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
         }, ]
 
