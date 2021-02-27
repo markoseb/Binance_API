@@ -1,0 +1,62 @@
+{%extends "base.html"%}
+{%import "bootstrap/wtf.html" as wtf%}
+
+
+{%block content%}
+
+<script type="text/javascript">
+
+google.charts.load("current", {packages:["corechart"]});
+google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable({{graphData|tojson }});
+
+        var options = {
+          title: 'My Coins values',
+          titleTextStyle: {color : 'white'},
+          is3D: true,
+          backgroundColor: '#152b35',
+          legend:{textStyle: {color: 'white', fontSize: 16}},
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart3d'));
+        chart.draw(data, options);
+      }
+
+
+</script>
+
+
+<div class="container d-flex justify-container-center">
+    <div class="row">
+
+  <div class="col-md">2 of 3</div>
+
+        <div class="col-md-auto">
+            <div id="piechart3d" style="width: 900px; height: 500px;"></div>
+        </div>
+        <p></p>
+    </div>
+</div>
+
+{%endblock%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
