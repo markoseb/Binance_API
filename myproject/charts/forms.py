@@ -3,6 +3,6 @@ from wtforms import SubmitField, SelectField
 
 
 class ChartForm(FlaskForm):
-    valuesType = SelectField('Choose your value:', choices=[('USDT', 'USDT'), ('PLN', 'PLN'), ('BTC', 'BTC')])
+    valuesType = SelectField('Choose your value:', choices=[('USDT', 'USDT'), ('PLN', 'PLN'), ('BTC', 'BTC'),('ALL','ALL')])
     token = SelectField('Choose your token:', choices=[])
     submit = SubmitField('refresh')

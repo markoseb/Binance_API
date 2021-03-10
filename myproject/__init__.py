@@ -9,7 +9,7 @@ app = Flask(__name__)
 Bootstrap(app)
 app.config['SECRET_KEY'] = "mysecretkey"
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(DataFolder, 'crypto_db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///' + os.path.join(DataFolder, 'crypto_db'))
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)

@@ -1,7 +1,7 @@
 
 import os
 import plotly.io._kaleido as pio
-from myproject.sql_data import get_table_sql
+from myproject.db import CoinsDb
 import plotly.express as px
 from filePath import DataFolder
 #pip3 install termgraph
@@ -11,6 +11,7 @@ from filePath import DataFolder
 
 y_vars=["USDT","BTC","PLN"]
 profit = {'profit': 0, 'pr_profit': 0}
+CurrentDb=CoinsDb()
 def create_plot_img(table_name = ""):
     
     """ 
@@ -24,7 +25,7 @@ def create_plot_img(table_name = ""):
     """
     
     # df = Read_csv(csv_file_name)
-    df = get_table_sql(table_name = table_name)
+    df = CurrentDb.get_table_sql(table_name = table_name)
     for y_var in y_vars:
         img_file=table_name+y_var
         get_profit(df, y_var)
@@ -37,9 +38,11 @@ def create_plot_img(table_name = ""):
 # os.system("termgraph data/TEST.csv")
 
 def get_profit(df, val):
-
-    first_val = df.head(1)[val].values
-    last_val = df.tail(1)[val].values
-    profit['profit'] = last_val - first_val
-    profit['pr_profit'] = profit['profit'] / first_val * 100
-    profit['last_val'] = last_val
+    if val in  df.keys():
+        first_val = df.head(1)[val].values
+        last_val = df.tail(1)[val].values
+        profit['profit'] = last_val - first_val
+        profit['pr_profit'] = profit['profit'] / first_val * 100
+        profit['last_val'] = last_val
+    else:
+        profit.clear()

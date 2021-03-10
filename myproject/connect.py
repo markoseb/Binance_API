@@ -1,12 +1,10 @@
 from binance.client import Client
-from myproject.graphs import create_plot_img
 from filePath import API_KEY, API_SECRET, DataFolder
-from myproject.sql_data import csv_to_sql
 import datetime
 from myproject import csv_data, scrape
 import os
 import pandas as pd
-from myproject.charts.views import coin_list
+from myproject.charts.views import coin_list, CurrentDb
 
 client = Client(API_KEY, API_SECRET)
 
@@ -52,7 +50,7 @@ def Create_db_graphs_account_balance():
                     Create_db_img(coin=coin, data=data)
 
         dataFramee = pd.DataFrame([total_coins_balance])
-        csv_to_sql(dataFramee, "Total_balance")
+        CurrentDb.add_to_db(dataFramee, "Total_balance")
         # create_plot_img("Total_balance")
 
 
@@ -113,7 +111,7 @@ def Create_db_img(coin={}, data={}):
     # available_coin_list.append(data)
     # csv_data.Write_csv_file(data_list= available_coin_list,columns=header_names,filepath=filepath)
     dataFramee = pd.DataFrame([data])
-    csv_to_sql(dataFramee, coin['asset'])
+    CurrentDb.add_to_db(dataFramee, coin['asset'])
     # create_plot_img(coin["asset"])
 
 
