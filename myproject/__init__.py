@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from filePath import DataFolder
 from flask_bootstrap import Bootstrap
+from myproject.db import CoinsDb
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -15,6 +16,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 Migrate(app, db)
+
+CurrentDb=CoinsDb()
 
 from myproject.charts.views import charts_blueprints
 

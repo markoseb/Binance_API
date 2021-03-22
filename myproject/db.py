@@ -40,22 +40,33 @@ class CoinsDb():
 
                         )
 
-
-    def get_table_sql(self,table_name = ""):
-        return pd.read_sql_table(table_name, self.myengine)
-
-
-    def drop_table(self,table_name):
-
+    def get_table(self, table_name=""):
         self.base = declarative_base()
         metadata = MetaData(self.myengine, reflect=True)
         table = metadata.tables.get(table_name)
         if table is not None:
+            return table
+
+    def get_table_df(self, table_name =""):
+        if self.get_table(table_name=table_name)!=None:
+            return pd.read_sql_table(table_name, self.myengine)
+
+    def get_json_table(self,table_name =""):
+        json={}
+        for coin, val in pd.read_sql_table(table_name, self.myengine).items():
+            json[coin]=val.values[0]
+        return json
+
+    def drop_table(self,table_name):
+        table = self.get_table(table_name=table_name)
+        if table is not None:
             logging.info(f'Deleting {table_name} table')
             self.base.metadata.drop_all(self.myengine, [table], checkfirst=True)
+            return True
+        else:
+            return f"There isn't any {table_name} table"
 
-    def json(csv_dataFrame={}):
-        return csv_dataFrame
+
 
 
 

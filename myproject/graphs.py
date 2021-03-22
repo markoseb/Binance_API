@@ -1,7 +1,7 @@
 
 import os
 import plotly.io._kaleido as pio
-from myproject.db import CoinsDb
+from myproject.charts.views import CurrentDb
 import plotly.express as px
 from filePath import DataFolder
 #pip3 install termgraph
@@ -11,7 +11,7 @@ from filePath import DataFolder
 
 y_vars=["USDT","BTC","PLN"]
 profit = {'profit': 0, 'pr_profit': 0}
-CurrentDb=CoinsDb()
+
 def create_plot_img(table_name = ""):
     
     """ 
@@ -25,7 +25,7 @@ def create_plot_img(table_name = ""):
     """
     
     # df = Read_csv(csv_file_name)
-    df = CurrentDb.get_table_sql(table_name = table_name)
+    df = CurrentDb.get_table_df(table_name = table_name)
     for y_var in y_vars:
         img_file=table_name+y_var
         get_profit(df, y_var)

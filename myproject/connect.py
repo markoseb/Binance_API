@@ -1,10 +1,10 @@
 from binance.client import Client
 from filePath import API_KEY, API_SECRET, DataFolder
 import datetime
-from myproject import csv_data, scrape
+from myproject import csv_data, scrape,CurrentDb
 import os
 import pandas as pd
-from myproject.charts.views import coin_list, CurrentDb
+from myproject.charts.views import coin_list
 
 client = Client(API_KEY, API_SECRET)
 
@@ -47,7 +47,7 @@ def Create_db_graphs_account_balance():
 
                     Get_total_coins_balance(total_coins_balance,coin=coin, data=data)
 
-                    Create_db_img(coin=coin, data=data)
+                    Update_db(coin=coin, data=data)
 
         dataFramee = pd.DataFrame([total_coins_balance])
         CurrentDb.add_to_db(dataFramee, "Total_balance")
@@ -91,9 +91,9 @@ def Expand_coin_dictionary(coin={}):
 
 
 def Get_headers_names(coin={}):
-    if len(header_names) == 1:
         for key in list(coin.keys()):
-            header_names.append(key)
+            if key not in header_names:
+                header_names.append(key)
 
 
 def Get_total_coins_balance(total_coins_balance,coin={}, data={}):
@@ -104,14 +104,17 @@ def Get_total_coins_balance(total_coins_balance,coin={}, data={}):
             total_coins_balance[total_key] = total_coins_balance[total_key] + float(coin[total_key])
 
 
-def Create_db_img(coin={}, data={}):
-    available_coin_list = []
-    filepath = os.path.join(DataFolder, f'{coin["asset"]}.csv')
+def Update_db(coin={}, data={}):
     data.update(coin)
-    # available_coin_list.append(data)
-    # csv_data.Write_csv_file(data_list= available_coin_list,columns=header_names,filepath=filepath)
     dataFramee = pd.DataFrame([data])
     CurrentDb.add_to_db(dataFramee, coin['asset'])
+
+
+def Create_plotImg(coin={}, data={}):
+    available_coin_list = []
+    filepath = os.path.join(DataFolder, f'{coin["asset"]}.csv')
+    available_coin_list.append(data)
+    csv_data.Write_csv_file(data_list= available_coin_list,columns=header_names,filepath=filepath)
     # create_plot_img(coin["asset"])
 
 
